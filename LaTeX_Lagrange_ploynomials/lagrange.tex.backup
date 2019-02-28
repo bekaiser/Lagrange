@@ -1,0 +1,2134 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
+\usepackage{amsmath}
+\usepackage{amssymb} 
+\usepackage[margin=1in]{geometry}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{pdfpages}
+\graphicspath{ {figures/} }
+% \usepackage{caption}
+% \usepackage{multirow}
+% \usepackage{mwe}
+% \usepackage{subfig}
+% \usepackage{caption}
+% \usepackage{float}
+% \usepackage{cite}
+\newcommand\myeq{\stackrel{\mathclap{\normalfont\mbox{\scriptsize{def}}}}{=}}
+
+
+\begin{document}
+
+
+\section*{Lagrange polynomials: the first derivative}
+$k+1$ grid points:
+\begin{equation*}
+ \frac{\partial\phi}{\partial{z}}=\sum_{j=0}^k\phi_jl_j^{(1)}(z)
+\end{equation*}
+where
+\begin{equation*}
+ l_j^{(1)}(z)=\sum_{i=0,i\neq{j}}^k\Big[\frac{1}{z_j-z_i}\prod_{m=0,m\neq(i,j)}^k\frac{z-z_m}{z_j-z_m}\Big]
+\end{equation*}
+Choose 4 grid points ($k=3)$:
+\begin{equation*}
+ z_0,z_1,z_2,z_3
+\end{equation*}
+Then:
+\begin{equation*}
+ \prod_{m=0,m\neq(i,j)}^k\frac{z-z_m}{z_j-z_m}
+ =\frac{z-z_0}{z_j-z_0}\cdot
+ \frac{z-z_1}{z_j-z_1}\cdot
+ \frac{z-z_2}{z_j-z_2}\cdot
+ \frac{z-z_3}{z_j-z_3}
+\end{equation*}
+\begin{flalign*}
+ l_j^{(1)}(z)&=
+ \frac{1}{z_j-z_0}\cdot
+ \frac{z-z_1}{z_j-z_1}\cdot
+ \frac{z-z_2}{z_j-z_2}\cdot
+ \frac{z-z_3}{z_j-z_3} 
+ \\
+ &+\frac{1}{z_j-z_1}\cdot
+ \frac{z-z_0}{z_j-z_0}\cdot
+ \frac{z-z_2}{z_j-z_2}\cdot
+ \frac{z-z_3}{z_j-z_3}
+ \\
+ &+\frac{1}{z_j-z_2}\cdot
+ \frac{z-z_0}{z_j-z_0}\cdot
+ \frac{z-z_1}{z_j-z_1}\cdot
+ \frac{z-z_3}{z_j-z_3}
+ \\
+  &+\frac{1}{z_j-z_3}\cdot
+  \frac{z-z_0}{z_j-z_0}\cdot
+ \frac{z-z_1}{z_j-z_1}\cdot
+ \frac{z-z_2}{z_j-z_2}
+\end{flalign*}
+Finally, the derivative of $\phi$ is given by evaluating:
+\begin{flalign*}
+ \sum_{j=0}^k\phi_jl_j^{(1)}(z)
+ &=\phi_0\Big(
+%  \frac{1}{z_j-z_0}\cdot
+%  \frac{z-z_1}{z_j-z_1}\cdot
+%  \frac{z-z_2}{z_j-z_2}\cdot
+%  \frac{z-z_3}{z_j-z_3} 
+%  \\
+%  &+
+ \frac{1}{z_0-z_1}\cdot
+% \frac{z-z_0}{z_j-z_0}\cdot
+ \frac{z-z_2}{z_0-z_2}\cdot
+ \frac{z-z_3}{z_0-z_3}
+ %\\
+ %&
+ +\frac{1}{z_0-z_2}\cdot
+ %\frac{z-z_0}{z_j-z_0}\cdot
+ \frac{z-z_1}{z_0-z_1}\cdot
+ \frac{z-z_3}{z_0-z_3}
+ %\\
+ % &
+  +\frac{1}{z_0-z_3}\cdot
+ % \frac{z-z_0}{z_j-z_0}\cdot
+ \frac{z-z_1}{z_0-z_1}\cdot
+ \frac{z-z_2}{z_0-z_2}\Big)\\
+ &+
+ \phi_1\Big(\frac{1}{z_1-z_0}\cdot
+ %\frac{z-z_1}{z_j-z_1}\cdot
+ \frac{z-z_2}{z_1-z_2}\cdot
+ \frac{z-z_3}{z_1-z_3} 
+%  \\
+%  &+\frac{1}{z_j-z_1}\cdot
+%  \frac{z-z_0}{z_j-z_0}\cdot
+%  \frac{z-z_2}{z_j-z_2}\cdot
+%  \frac{z-z_3}{z_j-z_3}
+ %\\
+ %&
+ +\frac{1}{z_1-z_2}\cdot
+ \frac{z-z_0}{z_1-z_0}\cdot
+ %\frac{z-z_1}{z_j-z_1}\cdot
+ \frac{z-z_3}{z_1-z_3}
+ %\\
+  %&
+  +\frac{1}{z_1-z_3}\cdot
+  \frac{z-z_0}{z_1-z_0}\cdot
+ %\frac{z-z_1}{z_j-z_1}\cdot
+ \frac{z-z_2}{z_1-z_2}\Big)\\
+ &+\phi_2\Big(
+  \frac{1}{z_2-z_0}\cdot
+ \frac{z-z_1}{z_2-z_1}\cdot
+ %\frac{z-z_2}{z_j-z_2}\cdot
+ \frac{z-z_3}{z_2-z_3} 
+ %\\
+ %&
+ +\frac{1}{z_2-z_1}\cdot
+ \frac{z-z_0}{z_2-z_0}\cdot
+ %\frac{z-z_2}{z_j-z_2}\cdot
+ \frac{z-z_3}{z_2-z_3}
+%  \\
+%  &+\frac{1}{z_j-z_2}\cdot
+%  \frac{z-z_0}{z_j-z_0}\cdot
+%  \frac{z-z_1}{z_j-z_1}\cdot
+%  \frac{z-z_3}{z_j-z_3}
+ %\\
+ % &
+  +\frac{1}{z_2-z_3}\cdot
+  \frac{z-z_0}{z_2-z_0}\cdot
+ \frac{z-z_1}{z_2-z_1}\Big)\\%\cdot
+ %\frac{z-z_2}{z_j-z_2}\Big)
+ &+\phi_3\Big(
+  \frac{1}{z_3-z_0}\cdot
+ \frac{z-z_1}{z_3-z_1}\cdot
+ \frac{z-z_2}{z_3-z_2}%\cdot
+ %\frac{z-z_3}{z_j-z_3} 
+ %\\
+ %&
+ +\frac{1}{z_3-z_1}\cdot
+ \frac{z-z_0}{z_3-z_0}\cdot
+ \frac{z-z_2}{z_3-z_2}\cdot
+ %\frac{z-z_3}{z_j-z_3}
+ %\\
+ %&
+ +\frac{1}{z_3-z_2}\cdot
+ \frac{z-z_0}{z_3-z_0}\cdot
+ \frac{z-z_1}{z_3-z_1}\Big)%\cdot
+ %\frac{z-z_3}{z_j-z_3}\Big)
+%  \\
+%   &+\frac{1}{z_j-z_3}\cdot
+%   \frac{z-z_0}{z_j-z_0}\cdot
+%  \frac{z-z_1}{z_j-z_1}\cdot
+%  \frac{z-z_2}{z_j-z_2}\Big)
+\end{flalign*}
+
+
+\newpage
+\section*{Lagrange polynomials: the second derivative}
+$k+1$ grid points:
+\begin{equation*}
+ \frac{\partial^2\phi}{\partial{z}^2}=\sum_{j=0}^k\phi_jl_j^{(2)}(z)
+\end{equation*}
+\begin{equation*}
+ l_j^{(2)}(z)=\sum_{i=0,i\neq{j}}^k\frac{1}{z_j-z_i}
+ \Bigg[\sum_{m=0,m\neq(i,j)}^k\Big[\frac{1}{z_j-z_m}\prod_{l=0,l\neq(i,j,m)}^k\frac{z-z_l}{z_j-z_l}\Big]\Bigg]
+\end{equation*}
+% The 3 point, 2nd order accurate second derivative:
+% \begin{equation*}
+%  \Big(\frac{\partial^2\phi}{\partial{z^2}}\Big)_i=
+% \frac{\phi_{i+1}(z_i-z_{i-1})+\phi_{i-1}(z_{i+1}-z_i)-\phi_i(z_{i+1}-z_{i-1})}
+%  {1/2(z_{i+1}-z_{i-1})(z_{i+1}-z_i)(z_i-z_{i-1})}
+% \end{equation*}
+% On a uniform grid, this becomes:
+% \begin{equation*}
+%  \Big(\frac{\partial^2\phi}{\partial{z^2}}\Big)_i=
+% \frac{\phi_{i+1}+\phi_{i-1}-2\phi_i}
+%  {\Delta{z}^2}
+% \end{equation*}
+Derivation using 3 points ($k=2$):
+\begin{equation*}
+ l_j^{(2)}(z)=\sum_{i=0,i\neq{j}}^2\frac{1}{z_j-z_i}
+ \Bigg[\sum_{m=0,m\neq(i,j)}^2\Big[\frac{1}{z_j-z_m}\prod_{l=0,l\neq(i,j,m)}^2\frac{z-z_l}{z_j-z_l}\Big]\Bigg]
+\end{equation*}
+\begin{flalign*}
+ \prod_{l=0,l\neq(i,j,m)}^2\frac{z-z_l}{z_j-z_l}&=
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+\end{flalign*}
+\begin{flalign*}
+ \sum_{m=0,m\neq(i,j)}^2\Big[\frac{1}{z_j-z_m}\prod_{l=0,l\neq(i,j,m)}^2\frac{z-z_l}{z_j-z_l}\Big]
+ &=
+ \frac{1}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+  \\
+   &+
+ \frac{1}{z_j-z_1}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+   \\
+   &+
+ \frac{1}{z_j-z_2}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+\end{flalign*}
+% \begin{flalign*}
+%  l_j^{(2)}(z)&=\sum_{i=0,i\neq{j}}^2\frac{1}{z_j-z_i}
+%  \Bigg[\sum_{m=0,m\neq(i,j)}^2\Big[\frac{1}{z_j-z_m}\prod_{l=0,l\neq(i,j,m)}^2\frac{z-z_l}{z_j-z_l}\Big]\Bigg]\\
+%  &=\frac{1}{z_j-z_0}
+%   \Big[ \frac{1}{z_j-z_0}
+%  \cdot
+%  \frac{z-z_1}{z_j-z_1}
+%  \cdot
+%   \frac{z-z_2}{z_j-z_2}
+%    +
+%  \frac{1}{z_j-z_1}
+%  \cdot
+%  \frac{z-z_0}{z_j-z_0}
+%  \cdot
+%   \frac{z-z_2}{z_j-z_2}
+%    +
+%  \frac{1}{z_j-z_2}
+%  \cdot
+%  \frac{z-z_0}{z_j-z_0}
+%  \cdot
+%  \frac{z-z_1}{z_j-z_1}
+%  \Big]
+%  \\
+%  &+\frac{1}{z_j-z_1}
+%   \Big[ \frac{1}{z_j-z_0}
+%  \cdot
+%  \frac{z-z_1}{z_j-z_1}
+%  \cdot
+%   \frac{z-z_2}{z_j-z_2}
+%    +
+%  \frac{1}{z_j-z_1}
+%  \cdot
+%  \frac{z-z_0}{z_j-z_0}
+%  \cdot
+%   \frac{z-z_2}{z_j-z_2}
+%    +
+%  \frac{1}{z_j-z_2}
+%  \cdot
+%  \frac{z-z_0}{z_j-z_0}
+%  \cdot
+%  \frac{z-z_1}{z_j-z_1}
+%  \Big]
+%  \\
+%  &+\frac{1}{z_j-z_2}
+%   \Big[ \frac{1}{z_j-z_0}
+%  \cdot
+%  \frac{z-z_1}{z_j-z_1}
+%  \cdot
+%   \frac{z-z_2}{z_j-z_2}
+%    +
+%  \frac{1}{z_j-z_1}
+%  \cdot
+%  \frac{z-z_0}{z_j-z_0}
+%  \cdot
+%   \frac{z-z_2}{z_j-z_2}
+%    +
+%  \frac{1}{z_j-z_2}
+%  \cdot
+%  \frac{z-z_0}{z_j-z_0}
+%  \cdot
+%  \frac{z-z_1}{z_j-z_1}
+%  \Big]
+% \end{flalign*}
+\begin{flalign*}
+ l_j^{(2)}(z)&=\sum_{i=0,i\neq{j}}^2\frac{1}{z_j-z_i}
+ \Bigg[\sum_{m=0,m\neq(i,j)}^2\Big[\frac{1}{z_j-z_m}\prod_{l=0,l\neq(i,j,m)}^2\frac{z-z_l}{z_j-z_l}\Big]\Bigg]\\
+ &=\frac{1}{z_j-z_0}
+  \Big[ 
+%   \frac{1}{z_j-z_0}
+%  \cdot
+%  \frac{z-z_1}{z_j-z_1}
+%  \cdot
+%   \frac{z-z_2}{z_j-z_2}
+%    +
+ \frac{1}{z_j-z_1}
+%  \cdot
+%  \frac{z-z_0}{z_j-z_0}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+   +
+ \frac{1}{z_j-z_2}
+%  \cdot
+%  \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \Big]
+ \\
+ &+\frac{1}{z_j-z_1}
+  \Big[ \frac{1}{z_j-z_0}
+%  \cdot
+%  \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+%    +
+%  \frac{1}{z_j-z_1}
+%  \cdot
+%  \frac{z-z_0}{z_j-z_0}
+%  \cdot
+%   \frac{z-z_2}{z_j-z_2}
+   +
+ \frac{1}{z_j-z_2}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+%  \cdot
+%  \frac{z-z_1}{z_j-z_1}
+ \Big]
+ \\
+ &+\frac{1}{z_j-z_2}
+  \Big[ \frac{1}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+%  \cdot
+%   \frac{z-z_2}{z_j-z_2}
+   +
+ \frac{1}{z_j-z_1}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+%  \cdot
+%   \frac{z-z_2}{z_j-z_2}
+%    +
+%  \frac{1}{z_j-z_2}
+%  \cdot
+%  \frac{z-z_0}{z_j-z_0}
+%  \cdot
+%  \frac{z-z_1}{z_j-z_1}
+ \Big]
+\end{flalign*}
+Now plug in:
+% \begin{flalign*}
+%  l_j^{(2)}(z)
+%  &=\frac{1}{z_j-z_0}
+%   \Big[ 
+%  \frac{1}{z_j-z_1}
+%  \cdot
+%   \frac{z-z_2}{z_j-z_2}
+%    +
+%  \frac{1}{z_j-z_2}
+%  \cdot
+%  \frac{z-z_1}{z_j-z_1}
+%  \Big]
+%  \\
+%  &+\frac{1}{z_j-z_1}
+%   \Big[ \frac{1}{z_j-z_0}
+%  \cdot
+%   \frac{z-z_2}{z_j-z_2}
+%    +
+%  \frac{1}{z_j-z_2}
+%  \cdot
+%  \frac{z-z_0}{z_j-z_0}
+%  \Big]
+%  \\
+%  &+\frac{1}{z_j-z_2}
+%   \Big[ \frac{1}{z_j-z_0}
+%  \cdot
+%  \frac{z-z_1}{z_j-z_1}
+%    +
+%  \frac{1}{z_j-z_1}
+%  \cdot
+%  \frac{z-z_0}{z_j-z_0}
+%  \Big]
+% \end{flalign*}
+\begin{flalign*}
+ l_1^{(2)}(z)
+ &=\frac{2}{(z_1-z_0)(z_1-z_2)}
+\end{flalign*}
+\begin{flalign*}
+ l_0^{(2)}(z)
+ &=
+ \frac{2}{(z_0-z_1)(z_0-z_2)}
+\end{flalign*}
+\begin{flalign*}
+ l_2^{(2)}(z)
+ &=\frac{2}{(z_2-z_0)(z_2-z_1)}
+\end{flalign*}
+Non-uniform grid:
+\begin{equation*}
+ \frac{2\phi_0}{(z_0-z_1)(z_0-z_2)}
+ +\frac{2\phi_1}{(z_1-z_0)(z_1-z_2)}
+ +\frac{2\phi_2}{(z_2-z_0)(z_2-z_1)}
+\end{equation*}
+\begin{equation*}
+ \frac{2\phi_0(z_2-z_1)}{(z_1-z_0)(z_2-z_0)(z_2-z_1)}
+ +\frac{-2\phi_1(z_2-z_0)}{(z_1-z_0)(z_2-z_1)(z_2-z_0)}
+ +\frac{2\phi_2(z_1-z_0)}{(z_2-z_0)(z_2-z_1)(z_1-z_0)}
+\end{equation*}
+\begin{equation*}
+ \frac{\phi_0(z_2-z_1)
+ -\phi_1(z_2-z_0)
+ +\phi_2(z_1-z_0)}{1/2(z_2-z_0)(z_2-z_1)(z_1-z_0)}
+\end{equation*}
+\begin{equation*}
+ \frac{\phi_{i+1}(z_i-z_{i-1})+\phi_{i-1}(z_{i+1}-z_i)
+ -\phi_i(z_{i+1}-z_{i-1})
+ }{1/2(z_{i+1}-z_{i-1})(z_{i+1}-z_i)(z_i-z_{i-1})}
+\end{equation*}
+\begin{equation*}
+ \Big(\frac{\partial^2\phi}{\partial{z^2}}\Big)_i=
+\frac{\phi_{i+1}(z_i-z_{i-1})+\phi_{i-1}(z_{i+1}-z_i)-\phi_i(z_{i+1}-z_{i-1})}
+ {1/2(z_{i+1}-z_{i-1})(z_{i+1}-z_i)(z_i-z_{i-1})}
+\end{equation*}
+Uniform grid:
+\begin{equation*}
+  l_0^{(2)}(z)
+ =
+ \frac{1}{\Delta{z}^2}
+ \qquad
+ l_1^{(2)}(z)
+ =-\frac{2}{\Delta{z}^2}
+ \qquad
+ l_2^{(2)}(z)
+ =\frac{1}{\Delta{z}^2}
+\end{equation*}
+\begin{equation*}
+ \frac{\partial^2\phi}{\partial{z}^2}
+ =
+ \frac{\phi_0-2\phi_1+\phi_2}{\Delta{z}^2}
+\end{equation*}
+
+\newpage
+4 data points $k=3$:
+\begin{equation*}
+ l_j^{(2)}(z)=\sum_{i=0,i\neq{j}}^3\frac{1}{z_j-z_i}
+ \Bigg[\sum_{m=0,m\neq(i,j)}^3\Big[\frac{1}{z_j-z_m}\prod_{l=0,l\neq(i,j,m)}^3\frac{z-z_l}{z_j-z_l}\Big]\Bigg]
+\end{equation*}
+\begin{flalign*}
+ \prod_{l=0,l\neq(i,j,m)}^3\frac{z-z_l}{z_j-z_l}&=
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+   \cdot
+  \frac{z-z_3}{z_j-z_3}
+\end{flalign*}
+\begin{flalign*}
+ \sum_{m=0,m\neq(i,j)}^3\Big[\frac{1}{z_j-z_m}\prod_{l=0,l\neq(i,j,m)}^3\frac{z-z_l}{z_j-z_l}\Big]
+ &=
+ \frac{1}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+   \cdot
+  \frac{z-z_3}{z_j-z_3}
+  \\
+   &+
+ \frac{1}{z_j-z_1}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+     \cdot
+  \frac{z-z_3}{z_j-z_3}
+   \\
+   &+
+ \frac{1}{z_j-z_2}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+    \cdot
+  \frac{z-z_3}{z_j-z_3}
+    \\
+   &+
+ \frac{1}{z_j-z_3}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+    \cdot
+  \frac{z-z_2}{z_j-z_2}
+\end{flalign*}
+\begin{flalign*}
+ l_j^{(2)}(z)&=\sum_{i=0,i\neq{j}}^3\frac{1}{z_j-z_i}
+ \Bigg[\sum_{m=0,m\neq(i,j)}^3\Big[\frac{1}{z_j-z_m}\prod_{l=0,l\neq(i,j,m)}^3\frac{z-z_l}{z_j-z_l}\Big]\Bigg]\\
+ &
+ =\frac{1}{z_j-z_0}
+ \Big[\frac{1}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+   \cdot
+  \frac{z-z_3}{z_j-z_3}
+   +
+ \frac{1}{z_j-z_1}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+     \cdot
+  \frac{z-z_3}{z_j-z_3}
+   \\
+   &
+   +
+ \frac{1}{z_j-z_2}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+    \cdot
+  \frac{z-z_3}{z_j-z_3}
+   +
+ \frac{1}{z_j-z_3}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+    \cdot
+  \frac{z-z_2}{z_j-z_2}\Big]
+  \\
+   &
+ +\frac{1}{z_j-z_1}
+ \Big[\frac{1}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+   \cdot
+  \frac{z-z_3}{z_j-z_3}
+   +
+ \frac{1}{z_j-z_1}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+     \cdot
+  \frac{z-z_3}{z_j-z_3}
+   \\
+   &
+   +
+ \frac{1}{z_j-z_2}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+    \cdot
+  \frac{z-z_3}{z_j-z_3}
+   +
+ \frac{1}{z_j-z_3}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+    \cdot
+  \frac{z-z_2}{z_j-z_2}\Big]
+   \\
+   &
+ +\frac{1}{z_j-z_2}
+ \Big[\frac{1}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+   \cdot
+  \frac{z-z_3}{z_j-z_3}
+   +
+ \frac{1}{z_j-z_1}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+     \cdot
+  \frac{z-z_3}{z_j-z_3}
+   \\
+   &
+   +
+ \frac{1}{z_j-z_2}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+    \cdot
+  \frac{z-z_3}{z_j-z_3}
+   +
+ \frac{1}{z_j-z_3}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+    \cdot
+  \frac{z-z_2}{z_j-z_2}\Big]
+   \\
+   &
+ +\frac{1}{z_j-z_3}
+ \Big[\frac{1}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+   \cdot
+  \frac{z-z_3}{z_j-z_3}
+   +
+ \frac{1}{z_j-z_1}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+     \cdot
+  \frac{z-z_3}{z_j-z_3}
+   \\
+   &
+   +
+ \frac{1}{z_j-z_2}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+    \cdot
+  \frac{z-z_3}{z_j-z_3}
+   +
+ \frac{1}{z_j-z_3}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+    \cdot
+  \frac{z-z_2}{z_j-z_2}\Big]
+\end{flalign*}
+\newpage
+\begin{flalign*}
+ l_j^{(2)}(z)
+ &
+ =\frac{1}{z_j-z_0}
+ \Big[
+ \frac{1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+     \cdot
+  \frac{z-z_3}{z_j-z_3}
+   +
+ \frac{1}{z_j-z_2}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+    \cdot
+  \frac{z-z_3}{z_j-z_3}
+   +
+ \frac{1}{z_j-z_3}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+    \cdot
+  \frac{z-z_2}{z_j-z_2}\Big]
+  \\
+   &
+ +\frac{1}{z_j-z_1}
+ \Big[\frac{1}{z_j-z_0}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+   \cdot
+  \frac{z-z_3}{z_j-z_3}
+   +
+ \frac{1}{z_j-z_2}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+    \cdot
+  \frac{z-z_3}{z_j-z_3}
+   +
+ \frac{1}{z_j-z_3}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+    \cdot
+  \frac{z-z_2}{z_j-z_2}\Big]
+   \\
+   &
+ +\frac{1}{z_j-z_2}
+ \Big[\frac{1}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+   \cdot
+  \frac{z-z_3}{z_j-z_3}
+   +
+ \frac{1}{z_j-z_1}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+     \cdot
+  \frac{z-z_3}{z_j-z_3}
+   +
+ \frac{1}{z_j-z_3}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \Big]
+   \\
+   &
+ +\frac{1}{z_j-z_3}
+ \Big[\frac{1}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+   +
+ \frac{1}{z_j-z_1}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+   +
+ \frac{1}{z_j-z_2}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+   \Big]
+\end{flalign*}
+Now plug in (code this up, BCs determine ghost $\phi$ values):
+\begin{flalign*}
+ l_0^{(2)}(z)
+ &
+ =
+ \frac{1}{z_0-z_1}
+ \Big[
+ \frac{1}{z_0-z_2}
+    \cdot
+  \frac{z-z_3}{z_0-z_3}
+   +
+ \frac{1}{z_0-z_3}
+    \cdot
+  \frac{z-z_2}{z_0-z_2}\Big]
+   \\
+   &
+ +\frac{1}{z_0-z_2}
+ \Big[
+ \frac{1}{z_0-z_1}
+     \cdot
+  \frac{z-z_3}{z_0-z_3}
+   +
+ \frac{1}{z_0-z_3}
+ \cdot
+ \frac{z-z_1}{z_0-z_1}
+ \Big]
+   \\
+   &
+ +\frac{1}{z_0-z_3}
+ \Big[
+ \frac{1}{z_0-z_1}
+ \cdot
+  \frac{z-z_2}{z_0-z_2}
+   +
+ \frac{1}{z_0-z_2}
+ \cdot
+ \frac{z-z_1}{z_0-z_1}
+   \Big]
+\end{flalign*}
+\begin{flalign*}
+ l_1^{(2)}(z)
+ &
+ =\frac{1}{z_1-z_0}
+ \Big[
+ \frac{1}{z_1-z_2}
+    \cdot
+  \frac{z-z_3}{z_1-z_3}
+   +
+ \frac{1}{z_1-z_3}
+    \cdot
+  \frac{z-z_2}{z_1-z_2}\Big]
+   \\
+   &
+ +\frac{1}{z_1-z_2}
+ \Big[\frac{1}{z_1-z_0}
+   \cdot
+  \frac{z-z_3}{z_1-z_3}
+   +
+ \frac{1}{z_1-z_3}
+ \cdot
+ \frac{z-z_0}{z_1-z_0}
+ \Big]
+   \\
+   &
+ +\frac{1}{z_1-z_3}
+ \Big[\frac{1}{z_1-z_0}
+ \cdot
+  \frac{z-z_2}{z_1-z_2}
+   +
+ \frac{1}{z_1-z_2}
+ \cdot
+ \frac{z-z_0}{z_1-z_0}
+   \Big]
+\end{flalign*}
+\begin{flalign*}
+ l_2^{(2)}(z)
+ &
+ =\frac{1}{z_2-z_0}
+ \Big[
+ \frac{1}{z_2-z_1}
+     \cdot
+  \frac{z-z_3}{z_2-z_3}
+   +
+ \frac{1}{z_2-z_3}
+ \cdot
+ \frac{z-z_1}{z_2-z_1}
+    \Big]
+  \\
+   &
+ +\frac{1}{z_2-z_1}
+ \Big[\frac{1}{z_2-z_0}
+   \cdot
+  \frac{z-z_3}{z_2-z_3}
+   +
+ \frac{1}{z_2-z_3}
+ \cdot
+ \frac{z-z_0}{z_2-z_0}
+    \Big]
+   \\
+   &
+ +\frac{1}{z_2-z_3}
+ \Big[\frac{1}{z_2-z_0}
+ \cdot
+ \frac{z-z_1}{z_2-z_1}
+   +
+ \frac{1}{z_2-z_1}
+ \cdot
+ \frac{z-z_0}{z_2-z_0}
+   \Big]
+\end{flalign*}
+\begin{flalign*}
+ l_3^{(2)}(z)
+ &
+ =\frac{1}{z_3-z_0}
+ \Big[
+ \frac{1}{z_3-z_1}
+ \cdot
+  \frac{z-z_2}{z_3-z_2}
+   +
+ \frac{1}{z_3-z_2}
+ \cdot
+ \frac{z-z_1}{z_3-z_1}
+  \Big]
+  \\
+   &
+ +\frac{1}{z_3-z_1}
+ \Big[\frac{1}{z_3-z_0}
+ \cdot
+  \frac{z-z_2}{z_3-z_2}
+   +
+ \frac{1}{z_3-z_2}
+ \cdot
+ \frac{z-z_0}{z_3-z_0}
+   \Big]
+   \\
+   &
+ +\frac{1}{z_3-z_2}
+ \Big[\frac{1}{z_3-z_0}
+ \cdot
+ \frac{z-z_1}{z_3-z_1}
+   +
+ \frac{1}{z_3-z_1}
+ \cdot
+ \frac{z-z_0}{z_3-z_0}
+ \Big]
+\end{flalign*}
+Now evaluate at $z=z_1$ (lower boundary condition):
+\begin{flalign*}
+ l_0^{(2)}(z_1)
+ &
+ =
+ \frac{1}{z_0-z_1}
+ \Big[
+ \frac{1}{z_0-z_2}
+    \cdot
+  \frac{z_1-z_3}{z_0-z_3}
+   +
+ \frac{1}{z_0-z_3}
+    \cdot
+  \frac{z_1-z_2}{z_0-z_2}\Big]
+   \\
+   &
+ +\frac{1}{z_0-z_2}
+ \Big[
+ \frac{1}{z_0-z_1}
+     \cdot
+  \frac{z_1-z_3}{z_0-z_3}
+ \Big]
+   \\
+   &
+ +\frac{1}{z_0-z_3}
+ \Big[
+ \frac{1}{z_0-z_1}
+ \cdot
+  \frac{z_1-z_2}{z_0-z_2}
+   \Big]
+\end{flalign*}
+\begin{flalign*}
+ l_1^{(2)}(z_1)
+ &
+ =\frac{1}{z_1-z_0}
+ \Big[
+ \frac{1}{z_1-z_2}
+    \cdot
+  \frac{z_1-z_3}{z_1-z_3}
+   +
+ \frac{1}{z_1-z_3}
+    \cdot
+  \frac{z_1-z_2}{z_1-z_2}\Big]
+   \\
+   &
+ +\frac{1}{z_1-z_2}
+ \Big[\frac{1}{z_1-z_0}
+   \cdot
+  \frac{z_1-z_3}{z_1-z_3}
+   +
+ \frac{1}{z_1-z_3}
+ \cdot
+ \frac{z_1-z_0}{z_1-z_0}
+ \Big]
+   \\
+   &
+ +\frac{1}{z_1-z_3}
+ \Big[\frac{1}{z_1-z_0}
+ \cdot
+  \frac{z_1-z_2}{z_1-z_2}
+   +
+ \frac{1}{z_1-z_2}
+ \cdot
+ \frac{z_1-z_0}{z_1-z_0}
+   \Big]
+\end{flalign*}
+\begin{flalign*}
+ l_2^{(2)}(z_1)
+ &
+ =\frac{1}{z_2-z_0}
+ \Big[
+ \frac{1}{z_2-z_1}
+     \cdot
+  \frac{z-z_3}{z_2-z_3}
+    \Big]
+  \\
+   &
+ +\frac{1}{z_2-z_1}
+ \Big[\frac{1}{z_2-z_0}
+   \cdot
+  \frac{z_1-z_3}{z_2-z_3}
+   +
+ \frac{1}{z_2-z_3}
+ \cdot
+ \frac{z_1-z_0}{z_2-z_0}
+    \Big]
+   \\
+   &
+ +\frac{1}{z_2-z_3}
+ \Big[
+ \frac{1}{z_2-z_1}
+ \cdot
+ \frac{z_1-z_0}{z_2-z_0}
+   \Big]
+\end{flalign*}
+\begin{flalign*}
+ l_3^{(2)}(z_1)
+ &
+ =\frac{1}{z_3-z_0}
+ \Big[
+ \frac{1}{z_3-z_1}
+ \cdot
+  \frac{z_1-z_2}{z_3-z_2}
+  \Big]
+  \\
+   &
+ +\frac{1}{z_3-z_1}
+ \Big[\frac{1}{z_3-z_0}
+ \cdot
+  \frac{z_1-z_2}{z_3-z_2}
+   +
+ \frac{1}{z_3-z_2}
+ \cdot
+ \frac{z_1-z_0}{z_3-z_0}
+   \Big]
+   \\
+   &
+ +\frac{1}{z_3-z_2}
+ \Big[
+ \frac{1}{z_3-z_1}
+ \cdot
+ \frac{z_1-z_0}{z_3-z_0}
+ \Big]
+\end{flalign*}
+
+
+\newpage
+Therefore the Lagrange polynomials are:
+% \begin{flalign*}
+%  l_j^{(2)}(z)&=
+%  \frac{1}{z_j-z_0}
+%   \Big[
+%  \frac{1}{z_j-z_1}
+%  \cdot
+%   \frac{z-z_2}{z_j-z_2}
+%    +
+%  \frac{1}{z_j-z_2}
+%  \cdot
+%  \frac{z-z_1}{z_j-z_1}\Big]\\
+%  &+\frac{1}{z_j-z_1}
+%   \Big[\frac{1}{z_j-z_0}
+%  \cdot
+%   \frac{z-z_2}{z_j-z_2}
+%    +
+%  \frac{1}{z_j-z_2}
+%  \cdot
+%  \frac{z-z_0}{z_j-z_0}
+%  \Big]\\
+%  &+\frac{1}{z_j-z_2}
+%   \Big[\frac{1}{z_j-z_0}
+%  \cdot
+%  \frac{z-z_1}{z_j-z_1}
+%  +
+%  \frac{1}{z_j-z_1}
+%  \cdot
+%  \frac{z-z_0}{z_j-z_0}
+%  \Big]
+% \end{flalign*}
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+Derivation using 4 points ($k=3$):
+\begin{equation*}
+ l_j^{(2)}(z)=\sum_{i=0,i\neq{j}}^3\frac{1}{z_j-z_i}
+ \Bigg[\sum_{m=0,m\neq(i,j)}^3\Big[\frac{1}{z_j-z_m}\prod_{l=0,l\neq(i,j,m)}^3\frac{z-z_l}{z_j-z_l}\Big]\Bigg]
+\end{equation*}
+\begin{flalign*}
+ \prod_{l=0,l\neq(i,j,m)}^3\frac{z-z_l}{z_j-z_l}&=
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+%  \cdot
+%   \frac{z-z_4}{z_j-z_4}
+\end{flalign*}
+\begin{flalign*}
+ \sum_{m=0,m\neq(i,j)}^3\Big[\frac{1}{z_j-z_m}\prod_{l=0,l\neq(i,j,m)}^3\frac{z-z_l}{z_j-z_l}\Big]
+ &=
+ \frac{1}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+%  \cdot
+%   \frac{z-z_4}{z_j-z_4}
+  \\
+   &+
+ \frac{1}{z_j-z_1}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+%  \cdot
+%   \frac{z-z_4}{z_j-z_4}
+   \\
+   &+
+ \frac{1}{z_j-z_2}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+%  \cdot
+%   \frac{z-z_4}{z_j-z_4}
+   \\
+   &+
+ \frac{1}{z_j-z_3}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+%  \cdot
+%   \frac{z-z_4}{z_j-z_4}
+%    \\
+%    &+
+%  \frac{1}{z_j-z_4}
+%  \cdot
+%  \frac{z-z_0}{z_j-z_0}
+%  \cdot
+%  \frac{z-z_1}{z_j-z_1}
+%  \cdot
+%   \frac{z-z_2}{z_j-z_2}
+%  \cdot
+%   \frac{z-z_3}{z_j-z_3}
+\end{flalign*}
+
+\begin{flalign*}
+ l_j^{(2)}(z)&=\sum_{i=0,i\neq{j}}^3\frac{1}{z_j-z_i}
+ \Bigg[\sum_{m=0,m\neq(i,j)}^3\Big[\frac{1}{z_j-z_m}\prod_{l=0,l\neq(i,j,m)}^3\frac{z-z_l}{z_j-z_l}\Big]\Bigg]\\
+ &=
+ \frac{1}{z_j-z_0}
+ \Big[
+ \frac{1}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+%   \\
+%    &
+   +
+ \frac{1}{z_j-z_1}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+   \\
+   &+
+ \frac{1}{z_j-z_2}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+%    \\
+%    &
+   +
+ \frac{1}{z_j-z_3}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+  \Big]\\
+   &+
+ \frac{1}{z_j-z_1}
+ \Big[
+ \frac{1}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+%   \\
+%    &
+   +
+ \frac{1}{z_j-z_1}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+   \\
+   &+
+ \frac{1}{z_j-z_2}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+%    \\
+%    &
+   +
+ \frac{1}{z_j-z_3}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+  \Big]\\
+  &+
+ \frac{1}{z_j-z_2}
+ \Big[
+ \frac{1}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+%   \\
+%    &
+   +
+ \frac{1}{z_j-z_1}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+   \\
+   &+
+ \frac{1}{z_j-z_2}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+%    \\
+%    &
+   +
+ \frac{1}{z_j-z_3}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+  \Big]\\
+  &+
+ \frac{1}{z_j-z_3}
+ \Big[
+ \frac{1}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+%   \\
+%    &
+   +
+ \frac{1}{z_j-z_1}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+   \\
+   &+
+ \frac{1}{z_j-z_2}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+%    \\
+%    &
+   +
+ \frac{1}{z_j-z_3}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+  \Big]
+\end{flalign*}
+
+
+\newpage
+\begin{flalign*}
+ l_j^{(2)}(z)&=\sum_{i=0,i\neq{j}}^4\frac{1}{z_j-z_i}
+ \Bigg[\sum_{m=0,m\neq(i,j)}^4\Big[\frac{1}{z_j-z_m}\prod_{l=0,l\neq(i,j,m)}^4\frac{z-z_l}{z_j-z_l}\Big]\Bigg]\\
+ &=
+ \frac{1}{z_j-z_0}
+ \Big[
+%  \frac{1}{z_j-z_0}
+%  \cdot
+%  \frac{z-z_1}{z_j-z_1}
+%  \cdot
+%   \frac{z-z_2}{z_j-z_2}
+%  \cdot
+%   \frac{z-z_3}{z_j-z_3}
+%  \cdot
+%   \frac{z-z_4}{z_j-z_4}
+%   \\
+%    &+
+ \frac{1}{z_j-z_1}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+ \cdot
+  \frac{z-z_4}{z_j-z_4}
+   \\
+   &+
+ \frac{1}{z_j-z_2}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+ \cdot
+  \frac{z-z_4}{z_j-z_4}
+   \\
+   &+
+ \frac{1}{z_j-z_3}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_4}{z_j-z_4}
+   \\
+   &+
+ \frac{1}{z_j-z_4}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}\Big]\\
+  &
+  +
+ \frac{1}{z_j-z_1}
+ \Big[
+ \frac{1}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+ \cdot
+  \frac{z-z_4}{z_j-z_4}
+  \\
+   &+
+%  \frac{1}{z_j-z_1}
+%  \cdot
+%  \frac{z-z_0}{z_j-z_0}
+%  \cdot
+%   \frac{z-z_2}{z_j-z_2}
+%  \cdot
+%   \frac{z-z_3}{z_j-z_3}
+%  \cdot
+%   \frac{z-z_4}{z_j-z_4}
+%    \\
+%    &+
+ \frac{1}{z_j-z_2}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+ \cdot
+  \frac{z-z_4}{z_j-z_4}
+   \\
+   &+
+ \frac{1}{z_j-z_3}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_4}{z_j-z_4}
+   \\
+   &+
+ \frac{1}{z_j-z_4}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}\Big]\\
+  &
+  +
+ \frac{1}{z_j-z_2}
+ \Big[
+ \frac{1}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+ \cdot
+  \frac{z-z_4}{z_j-z_4}
+  \\
+   &+
+ \frac{1}{z_j-z_1}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+ \cdot
+  \frac{z-z_4}{z_j-z_4}
+   \\
+   &+
+%  \frac{1}{z_j-z_2}
+%  \cdot
+%  \frac{z-z_0}{z_j-z_0}
+%  \cdot
+%  \frac{z-z_1}{z_j-z_1}
+%  \cdot
+%   \frac{z-z_3}{z_j-z_3}
+%  \cdot
+%   \frac{z-z_4}{z_j-z_4}
+%    \\
+%    &+
+ \frac{1}{z_j-z_3}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_4}{z_j-z_4}
+   \\
+   &+
+ \frac{1}{z_j-z_4}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}\Big]\\
+  &
+  +
+ \frac{1}{z_j-z_3}
+ \Big[
+ \frac{1}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+ \cdot
+  \frac{z-z_4}{z_j-z_4}
+  \\
+   &+
+ \frac{1}{z_j-z_1}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+ \cdot
+  \frac{z-z_4}{z_j-z_4}
+   \\
+   &+
+ \frac{1}{z_j-z_2}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+ \cdot
+  \frac{z-z_4}{z_j-z_4}
+   \\
+   &+
+%  \frac{1}{z_j-z_3}
+%  \cdot
+%  \frac{z-z_0}{z_j-z_0}
+%  \cdot
+%  \frac{z-z_1}{z_j-z_1}
+%  \cdot
+%   \frac{z-z_2}{z_j-z_2}
+%  \cdot
+%   \frac{z-z_4}{z_j-z_4}
+%    \\
+%    &+
+ \frac{1}{z_j-z_4}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}\Big]\\
+  &
+  +
+ \frac{1}{z_j-z_4}
+ \Big[
+ \frac{1}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+ \cdot
+  \frac{z-z_4}{z_j-z_4}
+  \\
+   &+
+ \frac{1}{z_j-z_1}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+ \cdot
+  \frac{z-z_4}{z_j-z_4}
+   \\
+   &+
+ \frac{1}{z_j-z_2}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+ \cdot
+  \frac{z-z_4}{z_j-z_4}
+   \\
+   &+
+ \frac{1}{z_j-z_3}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_4}{z_j-z_4}
+%    \\
+%    &+
+%  \frac{1}{z_j-z_4}
+%  \cdot
+%  \frac{z-z_0}{z_j-z_0}
+%  \cdot
+%  \frac{z-z_1}{z_j-z_1}
+%  \cdot
+%   \frac{z-z_2}{z_j-z_2}
+%  \cdot
+%   \frac{z-z_3}{z_j-z_3}
+  \Big]
+\end{flalign*}
+
+
+
+\begin{flalign*}
+ l_0^{(2)}(z)&=
+ \frac{1}{z_0-z_1}
+ \Big[
+%  \frac{1}{z_j-z_0}
+%  \cdot
+%  \frac{z-z_1}{z_j-z_1}
+%  \cdot
+%   \frac{z-z_2}{z_j-z_2}
+%  \cdot
+%   \frac{z-z_3}{z_j-z_3}
+%  \cdot
+%   \frac{z-z_4}{z_j-z_4}
+%   \\
+%    &+
+ \frac{1}{z_j-z_2}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+ \cdot
+  \frac{z-z_4}{z_j-z_4}
+   \\
+   &+
+ \frac{1}{z_j-z_3}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_4}{z_j-z_4}
+   \\
+   &+
+ \frac{1}{z_j-z_4}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}\Big]\\
+  &
+  +
+ \frac{1}{z_0-z_2}
+ \Big[
+%  \frac{1}{z_j-z_0}
+%  \cdot
+%  \frac{z-z_1}{z_j-z_1}
+%  \cdot
+%   \frac{z-z_2}{z_j-z_2}
+%  \cdot
+%   \frac{z-z_3}{z_j-z_3}
+%  \cdot
+%   \frac{z-z_4}{z_j-z_4}
+%   \\
+%    &+
+ \frac{1}{z_j-z_1}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+ \cdot
+  \frac{z-z_4}{z_j-z_4}
+   \\
+   &+
+ \frac{1}{z_j-z_3}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_4}{z_j-z_4}
+   \\
+   &+
+ \frac{1}{z_j-z_4}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}\Big]\\
+  &
+  +
+ \frac{1}{z_0-z_3}
+ \Big[
+%  \frac{1}{z_j-z_0}
+%  \cdot
+%  \frac{z-z_1}{z_j-z_1}
+%  \cdot
+%   \frac{z-z_2}{z_j-z_2}
+%  \cdot
+%   \frac{z-z_3}{z_j-z_3}
+%  \cdot
+%   \frac{z-z_4}{z_j-z_4}
+%   \\
+%    &+
+ \frac{1}{z_j-z_1}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+ \cdot
+  \frac{z-z_4}{z_j-z_4}
+   \\
+   &+
+ \frac{1}{z_j-z_2}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+ \cdot
+  \frac{z-z_4}{z_j-z_4}
+   \\
+   &+
+ \frac{1}{z_j-z_4}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}\Big]\\
+  &
+  +
+ \frac{1}{z_0-z_4}
+ \Big[
+%  \frac{1}{z_j-z_0}
+%  \cdot
+%  \frac{z-z_1}{z_j-z_1}
+%  \cdot
+%   \frac{z-z_2}{z_j-z_2}
+%  \cdot
+%   \frac{z-z_3}{z_j-z_3}
+%  \cdot
+%   \frac{z-z_4}{z_j-z_4}
+%   \\
+%    &+
+ \frac{1}{z_j-z_1}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+ \cdot
+  \frac{z-z_4}{z_j-z_4}
+   \\
+   &+
+ \frac{1}{z_j-z_2}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_3}{z_j-z_3}
+ \cdot
+  \frac{z-z_4}{z_j-z_4}
+   \\
+   &+
+ \frac{1}{z_j-z_3}
+ \cdot
+ \frac{z-z_0}{z_j-z_0}
+ \cdot
+ \frac{z-z_1}{z_j-z_1}
+ \cdot
+  \frac{z-z_2}{z_j-z_2}
+ \cdot
+  \frac{z-z_4}{z_j-z_4}
+  \Big]
+\end{flalign*}
+
+\newpage
+\textcolor{red}{rewrite in terms of $\Delta_z$} \\ \\
+
+The boundary conditions $u'=v'=w'=0$ at $z=[0,H]$ are not satisfied by the principal fundamental solution matrix.
+Therefore, we define a cell centered grid and impose open, homogeneous upper and lower boundary conditions, 
+such that the matrix $\mathbf{D}_{\text{I}}$ takes the form:
+\begin{equation*}
+ \mathbf{D}_{\text{I}}(k,l,z_i,t_j)=\begin{bmatrix} 
+ U(z_0)ik+\alpha_{00} & -5\alpha_1 & 4\alpha_1 & -\alpha_1 & 0 & 0 \\ 
+ \alpha_{1} & U(z_1)ik+\alpha_0 & \alpha_1 & 0 & 0 & 0 \\ 
+ 0 & \alpha_{1} & U(z_2)ik+\alpha_0 & \alpha_1 & 0 & 0 \\ 
+ 0 & 0 & \alpha_{1} & U(z_3)ik+\alpha_0 & \alpha_1 & 0 \\
+ 0 & 0 & 0 & \alpha_{1} & U(z_4)ik+\alpha_0 & \alpha_1 \\
+ 0 & 0 & -\alpha_{1} & 4\alpha_{1} & -5\alpha_{1} & U(z_5)ik+\alpha_{55} 
+ \end{bmatrix}
+\end{equation*}
+% \begin{equation*}
+%  \mathbf{D}_{\text{I}}(k,l,z_i)=\begin{bmatrix} 
+%  0 & 0 & 0 & 0 & 0 & 0 \\ 
+%  \alpha_{1^-} & U(z_1)ik+\alpha_2 & \alpha_1 & 0 & 0 & 0 \\ 
+%  0 & \alpha_{1^-} & U(z_2)ik+\alpha_2 & \alpha_1 & 0 & 0 \\ 
+%  0 & 0 & \alpha_{1^-} & U(z_3)ik+\alpha_2 & \alpha_1 & 0 \\
+%  0 & 0 & 0 & \alpha_{1^-} & U(z_4)ik+\alpha_2 & \alpha_1 \\
+%  0 & 0 & 0 & 0 & 0 & 0 
+%  \end{bmatrix}
+% \end{equation*}
+where the coefficients are defined:
+\begin{equation*}
+ \alpha_1=\text{Re}_L^{-1}/(\Delta{z})^2, \qquad 
+ \alpha_0=-\text{Re}_L^{-1}(2/(\Delta{z})^2+k^2+l^2)
+\end{equation*}
+and
+\begin{equation*}
+ \alpha_{00}=\alpha_{NN}=\text{Re}_L^{-1}(2/(\Delta{z})^2-k^2-l^2)
+\end{equation*}
+For the $\mathbf{D}_4$, we simply include the Prandtl number:
+% \begin{equation*}
+%  \alpha_{-1}=\alpha_1=(\text{Pr}\text{Re}_L)^{-1}/(\Delta{z})^2, \qquad 
+%  \alpha_0=-(\text{Pr}\text{Re}_L)^{-1}(2/(\Delta{z})^2+k^2+l^2)
+% \end{equation*}
+% \begin{equation*}
+%  \alpha_{00}=\alpha_{NN}=(\text{Pr}\text{Re}_L)^{-1}(2/(\Delta{z})^2-k^2-l^2)
+% \end{equation*}
+\begin{equation*}
+ \alpha_{-1}=\alpha_1=(\text{Pr}\text{Re}_L)^{-1}/(\Delta{z})^2, \qquad 
+ \alpha_0=-(\text{Pr}\text{Re}_L)^{-1}(2/(\Delta{z})^2+k^2+l^2)
+\end{equation*}
+\begin{equation*}
+ \alpha_{00}=\alpha_{NN}=(\text{Pr}\text{Re}_L)^{-1}(2/(\Delta{z})^2-k^2-l^2)
+\end{equation*}
+We use cell center values so the boundary conditions 
+aren't specified differently.
+
+Now for the pressure terms: the discrete form of Equation \ref{eq:p_components} can be expressed 
+as (returning the Laplacian operator to the LHS):
+\begin{equation*}
+ \mathbf{L}\mathbf{p}=\mathbf{d}\mathbf{w}+\mathbf{e}\mathbf{b}
+\end{equation*}
+Matrices $\mathbf{e}$ and $\mathbf{L}$ include discrete 
+derivative operators, while $\mathbf{d}$ only includes 
+the analytical solution at the points of interest.
+% \begin{equation}
+% \mathbf{x}(k,l,z,t)\hspace{1mm}\myeq\hspace{1mm}
+% \begin{bmatrix} \hat{u}' \\ \hat{v}' \\ \hat{w}' \\ \hat{b}' \end{bmatrix}
+%  \label{eq:x}
+% \end{equation}
+where $\mathbf{L},\mathbf{d},$ and $\mathbf{e}$ are size $[N\times{}N]$ (where $N$ is the number of points in $z$)
+and $\mathbf{p},\mathbf{w},$ and $\mathbf{b}$ are size $[N\times{}1]$, to obtain the discrete 
+coefficients:
+\begin{equation*}
+ \mathbf{p}=\mathbf{L}^{-1}\mathbf{d}\mathbf{w}+\mathbf{L}^{-1}\mathbf{e}\mathbf{b}
+ =\mathbf{P}_3\mathbf{w}+\mathbf{P}_4\mathbf{b}
+\end{equation*}
+where %therefore the discrete forms of $\mathcal{P}_{3},\mathcal{P}_{4}$ are:
+\begin{equation*}
+ \mathbf{P}_3=\mathbf{L}^{-1}\mathbf{d}, \qquad \mathbf{P}_4=\mathbf{L}^{-1}\mathbf{e},
+\end{equation*}
+First, the Laplacian matrix:
+\begin{equation}
+\mathbf{L}(k,l,z_i)\hspace{1mm}\myeq\hspace{1mm}
+\begin{bmatrix} 
+ \Lambda_{00} & 
+ -5\Lambda_{1} & 
+ 4\Lambda_{1} &  
+ -\Lambda_{1} & 
+ 0 &
+ 0 \\ 
+ %
+ \Lambda_{1} & 
+ \Lambda_{0} &
+ \Lambda_{1} &
+ 0 &
+ 0 &
+ 0 \\ 
+ %
+ 0 & 
+ \Lambda_{1} & 
+ \Lambda_{0} &
+ \Lambda_{1} &
+ 0 &
+ 0 \\ 
+ %
+  0 &
+  0 &
+ \Lambda_{1} & 
+ \Lambda_{0} &
+ \Lambda_{1} &
+  0 \\ 
+ % 
+  0 &
+  0 &
+  0 &
+ \Lambda_{1}& 
+ \Lambda_{0} &
+ \Lambda_{1}  \\
+  %
+  0 &
+  0 &
+  -\Lambda_{1} &
+  4\Lambda_{1} & 
+  -5\Lambda_{1} &
+ \Lambda_{NN}
+ \end{bmatrix}
+ \label{eq:L}
+\end{equation}
+
+where
+\begin{equation*}
+ \Lambda_{00}=-K^2+2(\Delta{z})^{-2}=\Lambda_{NN}
+\end{equation*}
+\begin{equation*}
+ \Lambda_0=-K^2-2(\Delta{z})^{-2}, \qquad \Lambda_{1^-}=\Lambda_{1}=(\Delta{z})^{-2}
+\end{equation*}
+Now for $\mathbf{d}$:
+\begin{equation*}
+ \mathbf{d}(z_i,t_j)=ik\begin{bmatrix} 
+ \partial_zU(z_0) & 0 & 0 & 0 & 0 & 0 \\ 
+ 0 & \partial_zU(z_1) & 0 & 0 & 0 & 0\\ 
+ 0 & 0 & \partial_zU(z_2) & 0 & 0 & 0 \\ 
+ 0 & 0 & 0 & \partial_zU(z_3) & 0 & 0 \\
+  0 & 0 & 0 & 0 & \partial_zU(z_4) & 0 \\
+   0 & 0 & 0 & 0 & 0 & \partial_zU(z_5) 
+ \end{bmatrix}
+%  \cdot
+%  \begin{bmatrix} \hat{w}' \\ \hat{w}' \\ \hat{w}' \\ \hat{w}'\end{bmatrix}
+%  =\begin{bmatrix} 0 \\ ik\partial_zU\hat{w}' \\ ik\partial_zU\hat{w}' \\ 0 \end{bmatrix}
+\end{equation*}
+Now for $\mathbf{e}$:
+\begin{equation*}
+ \mathbf{e}(k,z_i)=\begin{bmatrix} 
+  \epsilon_{00} & 4\epsilon_{1} & -\epsilon_{1} & 0 & 0 & 0 \\ 
+ -\epsilon_{1} & \epsilon_0 & \epsilon_{1}& 0 & 0 & 0 \\ 
+ 0 & -\epsilon_{1} & \epsilon_0 & \epsilon_{1} & 0 & 0 \\ 
+  0 & 0 & -\epsilon_{1} & \epsilon_0 & \epsilon_{1} & 0 \\
+   0 &  0 & 0 & -\epsilon_{1} & \epsilon_0 & \epsilon_{1} \\
+ 0 & 0 & 0 &  \epsilon_{1} & -4\epsilon_{1} & \epsilon_{55}
+ \end{bmatrix}
+%  \cdot
+%  \begin{bmatrix} \hat{b}' \\ \hat{b}' \\ \hat{b}' \\ \hat{b}'\end{bmatrix}
+%  %=\begin{bmatrix} \hat{0w}' \\ \hat{w}' \\ \hat{w}' \\ \hat{w}' \end{bmatrix}
+\end{equation*}
+where the coefficients are
+\begin{equation*}
+ \epsilon_{1}=\text{C}^2\cot\theta{}/(2(z_{i+1}-z_{i-1})) \qquad i=\{1,N_z-1\}
+\end{equation*}
+\begin{equation*}
+ \epsilon_{00}=-\text{C}^2(3\cot\theta/(2\Delta{z})+ik), \qquad 
+ \qquad \epsilon_{NN}=\text{C}^2(3\cot\theta/(2\Delta{z})-ik)
+\end{equation*}
+and 
+\begin{equation*}
+ \epsilon_0=-ik\text{C}^2
+\end{equation*}
+The $\boldsymbol{\partial}_z$ matrix is:
+\begin{equation*}
+ \boldsymbol{\partial}_z(z_i)=\begin{bmatrix} 
+  -3\partial_0 & 4\partial_0 & -\partial_0 & 0 & 0 & 0 \\ 
+ -\partial_0 & 0 & \partial_0 & 0 & 0 & 0 \\ 
+ 0 & -\partial_0 & 0 & \partial_0 & 0 & 0 \\ 
+  0 & 0 & -\partial_0 & 0 & \partial_0 & 0 \\
+   0 &  0 & 0 & -\partial_0 & 0 & \partial_0 \\
+ 0 & 0 & 0 & \partial_0 & -4\partial_0 & 3\partial_0
+ \end{bmatrix}
+\end{equation*}
+where the coefficient is
+\begin{equation*}
+ \partial_0=(2\Delta{z})^{-1}
+\end{equation*}
+Therefore $\mathbf{P}_3=\mathbf{P}_3(k,l,z_i,t_j)$ and $\mathbf{P}_4=\mathbf{P}_4(k,l,z_i)$,
+so the component of pressure that is influenced by the buoyancy perturbations is 
+independent of time. $\mathbf{P}_3$ merely 
+reaffirms that the perturbation field is non-hydrostatic.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% 
+% 
+% \newpage
+% Now we're ready to try out a 6$\times$6 solution. Let's choose dimensioanl $U=z^3/3$ and $U_\infty=0.35^3/3=0.014291666666666663$ 
+% for 
+% \begin{equation*}
+%  \mathbf{z}=[z_0,z_1,z_2,z_3,z_4,z_5]=[0.05,0.1,0.15,0.2,0.25,0.3] \qquad \Delta{z}=0.05
+% \end{equation*}
+% where $z$ is nondimensionalized. %by dividing by $U_\infty$ (setting $\omega=1$).
+% therefore the nondimensioanl $U$ is
+% \begin{equation*}
+%  U(z)=[0.00291545, 0.02332362, 0.0787172 , 0.18658892, 0.36443149,
+%        0.62973761]
+% \end{equation*}
+% and choosing $L=U_\infty/\omega$ where $\omega=1$ we get 
+% \begin{equation*}
+%  \partial_zU=[0.17492711, 0.69970845, 1.57434402, 2.79883382, 4.37317784,
+%        6.29737609]
+% \end{equation*}
+% Let $\partial_zB=0.001\partial_zU$. Choosing $k=l=1$ and $\text{Re}_L=1000$ and $\text{C}=0.25$, let's obtain the components 
+% of matrix $\mathbf{A}$. The Laplacian components 
+% are:
+% \begin{equation*}
+%  \Lambda_{00}=798.=\Lambda_{NN}
+% \end{equation*}
+% \begin{equation*}
+%  \Lambda_0=-802., \qquad \Lambda_{1^-}=\Lambda_{1}=400.
+% \end{equation*}
+% The diagonal of $\mathbf{d}$ is just $i\partial_zU$ using the numbers above. The components of 
+% $\mathbf{e}$ are 
+% \begin{equation*}
+%  \epsilon_{00}=-53.69297490546676-0.0625i, \qquad 
+%  \epsilon_{1}=17.897658301822254=-\epsilon_{1^-},
+%  \qquad \epsilon_{NN}=53.69297490546676-0.0625i
+% \end{equation*}
+% and 
+% \begin{equation*}
+%  \epsilon_0=-0.0625i
+% \end{equation*}
+% Therefore we get P3, P4:
+% 
+% Now do DI, P3, P4
+% 
+% 
+% % compute $\mathbf{A}$ (another test is the heaving solution with no z variation). Choose a 
+% % grid size and plug in \textcolor{red}{the partial derivatives have been non-dimensionalized, so their
+% % non-dimensional forms must be entered:}
+% % 
+% % %Choose $H=0.35$, but 
+% % Everything is non-dimensionalized using $U_\infty$ and $\omega$. This means 
+% % that the nondimensional $\partial_zU=z^2$ must be divided by $U_\infty^2/\omega$. Set $\omega=1$ and $U_\infty=z_5^3/3=0.23228177$.
+% % Note that $B_\infty=L_\text{e}N^2\sin\theta$. Let $N=0.1$ and $\sin\theta=0.1$ so then $B_\infty=0.000232281770$
+% % \begin{equation*}
+% %  \mathbf{z}=[z_0,z_1,z_2,z_3,z_4,z_5]=[0.05,0.1,0.15,0.2,0.25,0.3]
+% % \end{equation*}
+% % The nondimensional velocity gradient is then:
+% % \begin{equation*}
+% %  \partial_zU\mathbf{i}=[z_0,z_1,z_2,z_3,z_4,z_5]=[0.05,0.1,0.15,0.2,0.25,0.3]
+% % \end{equation*}
+% 
+% 
+% \newpage
+% where the discrete and continuous forms are the same:
+% % \begin{equation*}
+% %  \mathbf{d}\mathbf{w}=ik\partial_zU
+% % \end{equation*}
+% \begin{equation*}
+%  \mathbf{d}\mathbf{w}=\begin{bmatrix} 
+%  0 & 0 & 0 & 0 \\ 
+%  0 & ik\partial_zU & 0 & 0 \\ 
+%  0 & 0 & ik\partial_zU & 0 \\ 
+%  0 & 0 & 0 & 0
+%  \end{bmatrix}
+%  \cdot
+%  \begin{bmatrix} \hat{w}' \\ \hat{w}' \\ \hat{w}' \\ \hat{w}'\end{bmatrix}
+%  =\begin{bmatrix} 0 \\ ik\partial_zU\hat{w}' \\ ik\partial_zU\hat{w}' \\ 0 \end{bmatrix}
+% \end{equation*}
+% 
+% 
+% 
+% \textcolor{red}{the zeros at top and bottom of d are the boundary conditions on w!}\\ \\
+% The continuous form of eb:
+% \begin{equation*}
+%  \mathbf{e}\mathbf{b}=\begin{bmatrix} 
+%  -ik\text{C}^2 & 0 & 0 & 0 \\ 
+%  0 & (\cot\theta{}\partial_{z}-ik)\text{C}^2 & 0 & 0 \\ 
+%  0 & 0 & (\cot\theta{}\partial_{z}-ik)\text{C}^2 & 0 \\ 
+%  0 & 0 & 0 & -ik\text{C}^2
+%  \end{bmatrix}
+%  \cdot
+%  \begin{bmatrix} \hat{b}' \\ \hat{b}' \\ \hat{b}' \\ \hat{b}'\end{bmatrix}
+%  %=\begin{bmatrix} \hat{0w}' \\ \hat{w}' \\ \hat{w}' \\ \hat{w}' \end{bmatrix}
+% \end{equation*}
+% where $\partial_z\hat{b}'=0$ at the upper and lower boundaries. Now let's do the discrete form:
+% \begin{equation*}
+%  \mathbf{e}\mathbf{b}=\begin{bmatrix} 
+%  -ik\text{C}^2 & 0 & 0 & 0 \\ 
+%  -\text{C}^2\cot\theta{}/(2\Delta{z}) & -ik\text{C}^2 & \text{C}^2\cot\theta{}/(2\Delta{z}) & 0 \\ 
+%  0 & -\text{C}^2\cot\theta{}/(2\Delta{z}) & -ik\text{C}^2 & \text{C}^2\cot\theta{}/(2\Delta{z}) \\ 
+%  0 & 0 & 0 & -ik\text{C}^2
+%  \end{bmatrix}
+%  \cdot
+%  \begin{bmatrix} \hat{b}' \\ \hat{b}' \\ \hat{b}' \\ \hat{b}'\end{bmatrix}
+%  %=\begin{bmatrix} \hat{0w}' \\ \hat{w}' \\ \hat{w}' \\ \hat{w}' \end{bmatrix}
+% \end{equation*}
+% \begin{equation}
+%  \frac{\partial{}f}{\partial{z}}\Big|_i\approx
+%  \frac{f_{i+1}-f_{i-1}}{2\Delta{z}}
+%  %\mathcal{O}\big((\Delta{z})^2\big)
+%  \qquad \text{interior}
+% \end{equation}
+% \textcolor{red}{What does L look like?}\\ \\
+% 
+% 
+% Matrices $\mathbf{e}$ and $\mathbf{L}$ include discrete 
+% derivative operators, while $\mathbf{d}$ only includes 
+% the analytical solution at the points of interest.
+% % \begin{equation}
+% % \mathbf{x}(k,l,z,t)\hspace{1mm}\myeq\hspace{1mm}
+% % \begin{bmatrix} \hat{u}' \\ \hat{v}' \\ \hat{w}' \\ \hat{b}' \end{bmatrix}
+% %  \label{eq:x}
+% % \end{equation}
+% where $\mathbf{L},\mathbf{d},$ and $\mathbf{e}$ are size $[N\times{}N]$ (where $N$ is the number of points in $z$)
+% and $\mathbf{p},\mathbf{w},$ and $\mathbf{b}$ are size $[N\times{}1]$, to obtain the discrete 
+% coefficients:
+% \begin{equation*}
+%  \mathbf{p}=\mathbf{L}^{-1}\mathbf{d}\mathbf{w}+\mathbf{L}^{-1}\mathbf{e}\mathbf{b}
+% \end{equation*}
+% therefore the discrete forms of $\mathcal{P}_{3},\mathcal{P}_{4}$ are:
+% \begin{equation*}
+%  \mathbf{P}_3=\mathbf{L}^{-1}\mathbf{d}, \qquad \mathbf{P}_4=\mathbf{L}^{-1}\mathbf{e},
+% \end{equation*}
+% Solving this results in a matrix of $N$ by $N$ where $N$ 
+% is the grid points. How do you expand the continuous 
+% $\mathbf{A}$ operator to make the discrete form? See Floquet 
+% paper, it's something like $NM$ by $NM$, so that the column 
+% vector is now $NM$ by 1. Does $\mathbf{P}_4$ have off-diagonal 
+% terms? Even if it does, it they only apply to $b$ and wind 
+% up in the 4th column of $A$. \\ \\
+% 
+% 
+% (both of which are size $[N\times{}N]$, 
+% for each $k,l$ combination). That means that the \\
+% 
+% Multiplying 
+% by an $[N\times{}N]$ matrix of the discrete form of $\partial/\partial_z$, we 
+% need only to remember that the discrete boundary conditions should be $w=0$ and 
+% $b_z=0$ at $z=0$ and $w_z=b_z=0$ at $z=\infty$.
+% 
+% 
+% 
+% 
+% \subsection*{6$\times$6 example}
+
+
+\end{document}
